@@ -1,9 +1,10 @@
 import React from "react";
+import { analytics } from "@/utils/analytics";
 
-type Props = {};
+const Page = async () => {
+  const pageview = await analytics.retrieveDays("pageview", 2);
 
-const Page = (props: Props) => {
-  return <div>Analytics Page</div>;
+  return <pre>{JSON.stringify(pageview)}</pre>;
 };
 
 export default Page;
