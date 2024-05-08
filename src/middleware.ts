@@ -1,12 +1,22 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { analytics } from "./utils/analytics";
 
-export function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
   if (req.nextUrl.pathname === "/") {
-    console.log("TRACK");
+    try {
+      analytics.track("pageview", {
+        page: "/",
+        country: req.geo?.country,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
+  return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
-export const matcher = {
+// The below ensures the middleware runs when the path is reached
+
+export const config = {
   matcher: ["/"],
 };
