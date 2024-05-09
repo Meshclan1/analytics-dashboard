@@ -1,45 +1,18 @@
 "use client";
 
 import { analytics } from "@/utils/analytics";
-import { BarChart, Card } from "@tremor/react";
-import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
+import { BarChart, Button, Card } from "@tremor/react";
+
 import React from "react";
 import ReactCountryFlag from "react-country-flag";
+import Link from "next/link";
+import Badge from "./Badge";
 
 type AnalyticsDashboardProps = {
   avgVisitorsPerDay: string;
   visitorAmountToday: number;
   timeSeriesPageViews: Awaited<ReturnType<typeof analytics.retrieveDays>>;
   topCountries: [string, number][];
-};
-
-const Badge = ({ percentage }: { percentage: number }) => {
-  const isPositive = percentage > 0;
-  const isNeutral = percentage === 0;
-  const isNegative = percentage < 0;
-
-  if (isNaN(percentage)) return null;
-
-  const positiveClassname = "bg-green-900/25 text-green-400 ring-green-400/25";
-  const neutralClassname = "bg-zinc-900/25 text-zinc-400 ring-zinc-400/25";
-  const NegativeClassname = "bg-red-900/25 text-red-400 ring-red-400/25";
-
-  return (
-    <span
-      className={`inline-flex gap-1 items-center rounded-md px-2 py-1 text-sx font-medium ring-1 ring-inset ${
-        isPositive
-          ? positiveClassname
-          : isNeutral
-          ? neutralClassname
-          : NegativeClassname
-      }`}
-    >
-      {isPositive ? <ArrowUpRight className="h-3 w-3" /> : null}
-      {isNeutral ? <ArrowRight className="h-3 w-3" /> : null}
-      {isNegative ? <ArrowDownRight className="h-3 w-3" /> : null}
-      {percentage.toFixed(0)}%
-    </span>
-  );
 };
 
 const AnalyticsDashboard = ({
@@ -49,7 +22,10 @@ const AnalyticsDashboard = ({
   topCountries,
 }: AnalyticsDashboardProps) => {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 justify-center items-center">
+      <Button>
+        <Link href="/">Home Page</Link>
+      </Button>
       <div className="grid w-full mx-auto grid-cols-1 sm:grid-cols-2 gap-6">
         <Card className="w-full mx-auto max-w-xs">
           <p className="text-tremor-default text-dark-tremor-content">
