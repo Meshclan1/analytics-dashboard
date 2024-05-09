@@ -1,3 +1,9 @@
+<h1>Analytics Dashboard</h1>
+<img width="1259" alt="Screenshot 2024-05-09 at 16 03 59" src="https://github.com/Meshclan1/analytics-dashboard/assets/100096778/766e7a2e-bfdc-4ac9-bb0f-e7cf730ef726">
+
+---
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
