@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <div className="h-screen flex items-center justify-center">
       <Button>
-        <Link href="/analytics">Click Here: Enter the Analytics Page</Link>
+        <Link href="/analytics" className="text-white">
+          Click Here: Enter the Analytics Page
+        </Link>
       </Button>
     </div>
   );
