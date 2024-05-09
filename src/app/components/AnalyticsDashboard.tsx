@@ -2,6 +2,7 @@
 
 import { analytics } from "@/utils/analytics";
 import { BarChart, Card } from "@tremor/react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
 import React from "react";
 import ReactCountryFlag from "react-country-flag";
 
@@ -10,6 +11,35 @@ type AnalyticsDashboardProps = {
   visitorAmountToday: number;
   timeSeriesPageViews: Awaited<ReturnType<typeof analytics.retrieveDays>>;
   topCountries: [string, number][];
+};
+
+const Badge = ({ percentage }: { percentage: number }) => {
+  const isPositive = percentage > 0;
+  const isNeutral = percentage === 0;
+  const isNegative = percentage < 0;
+
+  if (isNaN(percentage)) return null;
+
+  const positiveClassname = "bg-green-900/25 text-green-400 ring-green-400/25";
+  const neutralClassname = "bg-zinc-900/25 text-zinc-400 ring-zinc-400/25";
+  const NegativeClassname = "bg-red-900/25 text-red-400 ring-red-400/25";
+
+  return (
+    <span
+      className={`inline-flex gap-1 items-center rounded-md px-2 py-1 text-sx font-medium ring-1 ring-inset ${
+        isPositive
+          ? positiveClassname
+          : isNeutral
+          ? neutralClassname
+          : NegativeClassname
+      }`}
+    >
+      {isPositive ? <ArrowUpRight className="h-3 w-3" /> : null}
+      {isNeutral ? <ArrowRight className="h-3 w-3" /> : null}
+      {isNegative ? <ArrowDownRight className="h-3 w-3" /> : null}
+      {percentage.toFixed(0)}%
+    </span>
+  );
 };
 
 const AnalyticsDashboard = ({
@@ -30,8 +60,13 @@ const AnalyticsDashboard = ({
           </p>
         </Card>
         <Card className="w-full mx-auto max-w-xs">
-          <p className="text-tremor-default text-dark-tremor-content">
+          <p className="flex gap-2.5 items-center text-tremor-default text-dark-tremor-content">
             Visitors Today
+            <Badge
+              percentage={
+                (visitorAmountToday / Number(avgVisitorsPerDay) - 1) * 100
+              }
+            />
           </p>
           <p className="text-3xl text-dark-tremor-content-strong font-semibold">
             {visitorAmountToday}
