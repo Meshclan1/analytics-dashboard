@@ -58,7 +58,7 @@ const AnalyticsDashboard = ({
           {topCountries?.map(([countryCode, number]) => {
             return (
               <div
-                key=""
+                key={countryCode}
                 className="text-dark-tremor-content-strong flex items-center gap-3"
               >
                 <p className="hidden sm:block text-tremor-content">
